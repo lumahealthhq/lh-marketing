@@ -1,0 +1,9 @@
+# node modules
+node_modules
+
+# ENV
+*.env
+
+# MAC
+.DS_Store
+**/.DS_Store

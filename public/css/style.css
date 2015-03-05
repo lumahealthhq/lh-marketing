@@ -1155,7 +1155,9 @@ body.snowflakes {
 }
 #single_img_bg.image6 {
 	/*background-image: url(../images/bg/single_img_bg_5.jpg);*/
-	background-image: url(../images/bg/office.jpg);
+	/*background-image: url(../images/bg/office.jpg);*/
+	background-image: url(../images/bg/clean-and-calm.jpg);
+	/*background-image: url(http://www.furinco.com/img/2014/12/magnificent-flaniganphotography-doctors-office-waiting-area.jpg);*/
 	-webkit-filter: blur(2px);
 
 }

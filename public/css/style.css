@@ -37,7 +37,7 @@ body {
 	position: relative;
 	margin: 0;
 	font-weight: 600;
-	font-family: 'Titillium Web', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	background: #000;
 	color: #fff;
 	font-size: 18px;
@@ -798,7 +798,7 @@ button::-moz-focus-inner {
 	position: relative;
 }
 #countdown_block .knob_progress .progress_count input {
-	font-family: 'Titillium Web', sans-serif !important;
+	font-family: 'Montserrat', sans-serif !important;
 	font-weight: 900 !important;
 	height: 62px !important;
 	font-size: 52px !important;

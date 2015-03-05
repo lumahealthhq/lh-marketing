@@ -157,12 +157,6 @@ $(document).ready(function() {
 			$(this).parents('form').find('input').removeClass('hover');
 	});
 
-	$('#site_content .part_content').each(function(){
-		$(this).mCustomScrollbar({
-			autoHideScrollbar: true,
-			scrollbarPosition: 'outside'
-		});
-	});
 
 	if( $('#gmap').length > 0 ) {
 		new GMaps({
@@ -181,6 +175,7 @@ $(document).ready(function() {
 	}
 
 	if( $('#site_video_bg.local').length > 0 ) {
+		console.log('here')
 		$('#site_video_bg.local').vide({
 			mp4: "video/background-video.mp4", /* Local Video File Path */
 		}, {

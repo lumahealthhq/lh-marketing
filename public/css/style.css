@@ -1111,23 +1111,6 @@ button::-moz-focus-inner {
 	Background
 */
 
-body.cloud_bg,
-body.snowflakes {
-	background: url(../images/clouds/clouds-bg.jpg) center center no-repeat;
-	background-size: cover;
-}
-body.snowflakes {
-	background-image: url(../images/bg/snowfall.jpg);
-}
-.cloud {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background: url(../images/bg/clouds_bg.jpg) center center no-repeat;
-}
-
 #single_img_bg {
 	height: 100%;
 	position: fixed;
@@ -1137,7 +1120,7 @@ body.snowflakes {
 	right: 0;
 	z-index: 1;
 
-	background: url(../images/bg/single_img_bg.jpg) center 0 no-repeat; /* Here you can override background image */
+	background: url(../images/single_img_bg.jpg) center 0 no-repeat; /* Here you can override background image */
 	background-attachment: fixed;
 	background-size: cover;
 }
@@ -1154,50 +1137,12 @@ body.snowflakes {
 	background-image: url(../images/bg/single_img_bg_2.jpg);
 }
 #single_img_bg.image6 {
-	/*background-image: url(../images/bg/single_img_bg_5.jpg);*/
-	/*background-image: url(../images/bg/office.jpg);*/
-	background-image: url(../images/bg/clean-and-calm.jpg);
-	/*background-image: url(http://www.furinco.com/img/2014/12/magnificent-flaniganphotography-doctors-office-waiting-area.jpg);*/
-	-webkit-filter: blur(2px);
+	background-image: url(../images/clean-and-calm.jpg);
 
 }
 body.raindrops {
 	background: url(../images/raindrops.jpg) 0 0 no-repeat;
 	background-size: cover;
-}
-
-.pattern_overlay:after,
-#tubular-container:after {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background: url(../images/pattern_overlay.png) 0 0 repeat;
-	display: block;
-	content: "";
-}
-#gmap {
-	position: fixed !important;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-}
-#snowflakes,
-#rain_wrapper,
-#rain_bg {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	z-index: 2;
-	max-width: 100%;
-}
-#rain_bg {
-	width: 100%;
 }
 
 /* Single color background */

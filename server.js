@@ -2,8 +2,7 @@ var express = require('express'),
     bodyparser = require('body-parser');
 var port = process.env.PORT || 5000;
 var sendgrid  = require('sendgrid')(process.env.SENDGRID_API_USER, process.env.SENDGRID_API_KEY);
-var Slackbot = require('slackbot')
-var slackbot = new Slackbot(process.env.SLACKDOMAIN, process.env.SLACK_TOKEN);
+var slack = require('slack-notify')(process.env.SLACK_ENDPOINT);
 
 var app = express();
 app.use(bodyparser.urlencoded());
@@ -43,13 +42,10 @@ app.post('/signup', function(request, response) {
 	  console.log(json);
 	});
 
-	slackbot.send('#general',
-		'sup fools. ' + name + ' signed up, check ur email for the deets',
-		function(err, res, body) {
-		  if(err) {
-		  	console.log(err);
-		  };
-		  console.log(body);
+	slack.send({
+		channel: '#general',
+		text: 'yo homies: `' + name + '` ' + email + ' just signed up on the marketing site. more deets in ur email.',
+		username: 'badbot'
 	});
 
 

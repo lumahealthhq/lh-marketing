@@ -7,7 +7,7 @@ var slackbot = new Slackbot(process.env.SLACKDOMAIN, process.env.SLACK_TOKEN);
 
 var app = express();
 app.use(bodyparser.urlencoded());
-if(process.env.PRODUCTION) {
+if(process.env.ENV) {
 	app.use(require('express-force-domain')('http://www.lumahealth.io'));
 }
 

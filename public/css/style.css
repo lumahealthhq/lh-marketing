@@ -1115,6 +1115,12 @@ body {
 	background-attachment: fixed;
 	background-size: cover;
 }
+
+@media all and (max-width: 600px) {
+    body {
+        background:grey;
+    }
+}
 /* Slideshow 1 */
 
 #bg_slideshow {

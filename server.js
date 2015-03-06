@@ -3,10 +3,13 @@ var express = require('express'),
 var port = process.env.PORT || 5000;
 var sendgrid  = require('sendgrid')(process.env.SENDGRID_API_USER, process.env.SENDGRID_API_KEY);
 var Slackbot = require('slackbot')
-var slackbot = new Slackbot("lumahealth", "xoxb-3955566628-gP7poST27lB7lNaPbTSyvmEX");
+var slackbot = new Slackbot(process.env.SLACKDOMAIN, process.env.SLACK_TOKEN);
 
 var app = express();
 app.use(bodyparser.urlencoded());
+if(process.env.PRODUCTION) {
+	app.use(require('express-force-domain')('http://www.lumahealth.io'));
+}
 
 app.get('/', function(request, response) {
     response.sendfile(__dirname + '/public/index.html');

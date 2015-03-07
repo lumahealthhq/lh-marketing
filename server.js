@@ -21,6 +21,7 @@ if(process.env.ENV) {
 
 app.get('/', function(request, response) {
     response.sendfile(__dirname + '/public/index.html');
+    console.log(request)
 });
 
 app.post('/signup', function(request, response) {

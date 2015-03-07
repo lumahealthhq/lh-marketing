@@ -11,7 +11,6 @@ if(process.env.ENV) {
 
 	app.use(function(req, res, next) {
 		// NOTE: this is cloudfront SSL Simple specific
-		console.log(req.headers['cf-visitor'].scheme, req.headers['cf-visitor']);
 	    if (req.headers['cf-visitor'] != '{"scheme":"https"}') {
 	        res.redirect('https://' + req.headers.host + req.path);
 	    }

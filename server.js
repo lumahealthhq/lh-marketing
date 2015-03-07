@@ -9,14 +9,14 @@ app.use(bodyparser.urlencoded());
 if(process.env.ENV) {
 	app.use(require('express-force-domain')('https://www.lumahealth.io'));
 
-	app.use(function(req, res, next) {
-	    if (req.headers['x-forwarded-proto'] != 'https') {
-	        res.redirect('https://' + req.headers.host + req.path);
-	    }
-	    else {
-	        return next();
-	    }
-	});
+	// app.use(function(req, res, next) {
+	//     if (req.headers['x-forwarded-proto'] != 'https') {
+	//         res.redirect('https://' + req.headers.host + req.path);
+	//     }
+	//     else {
+	//         return next();
+	//     }
+	// });
 }
 
 app.get('/', function(request, response) {

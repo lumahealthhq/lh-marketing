@@ -7,14 +7,20 @@ var slack = require('slack-notify')(process.env.SLACK_ENDPOINT);
 var app = express();
 app.use(bodyparser.urlencoded());
 if(process.env.ENV) {
-	app.use(require('express-force-domain')('https://www.lumahealth.io'));
+	app.use(function(req, res, next) {
+		if (req.headers['host'] != 'www.lumahealth.io') {
+			res.redirect('https://www.lumahealth.io' + req.path);
+		} else {
+			return next();
+		}
+
+	});
 
 	app.use(function(req, res, next) {
 		// NOTE: this is cloudfront SSL Simple specific
 	    if (req.headers['cf-visitor'] != '{"scheme":"https"}') {
 	        res.redirect('https://' + req.headers.host + req.path);
-	    }
-	    else {
+	    } else {
 	        return next();
 	    }
 	});

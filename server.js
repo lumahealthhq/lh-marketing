@@ -7,7 +7,6 @@ var slack = require('slack-notify')(process.env.SLACK_ENDPOINT);
 var app = express();
 app.use(bodyparser.urlencoded());
 if(process.env.ENV) {
-// console.log()
 	app.use(require('express-force-domain')('https://www.lumahealth.io'));
 
 	app.use(function(req, res, next) {
@@ -23,6 +22,7 @@ if(process.env.ENV) {
 
 
 app.get('/', function(request, response) {
+console.log(request.headers)
     response.sendfile(__dirname + '/public/index.html');
 });
 

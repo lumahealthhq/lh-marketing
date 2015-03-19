@@ -26,13 +26,24 @@ if(process.env.ENV) {
 	});
 }
 
+app.get('/login', function(request, response) {
+	if(request.headers.host.indexOf('fortid') > 0) {
+		response.redirect('http://app.fortid.com/')
+	} else if(request.headers.host.indexOf('luma') > 0) {
+		response.redirect('http://app.lumahealth.io/')
+	} else {
+		response.redirect('http://localhost:3000/')
+	}
+
+
+});
+
 
 app.get('/', function(request, response) {
-console.log(request.headers)
     response.sendfile(__dirname + '/public/index.html');
 });
 
-app.post('/signup', function(request, response) {
+app.post('/moreinfo', function(request, response) {
 
 	response.sendfile(__dirname + '/public/thankyou.html');
 

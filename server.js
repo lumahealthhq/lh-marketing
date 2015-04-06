@@ -30,7 +30,7 @@ app.get('/login', function(request, response) {
 	if(request.headers.host.indexOf('fortid') > 0) {
 		response.redirect('https://app.fortid.com/')
 	} else if(request.headers.host.indexOf('luma') > 0) {
-		response.redirect('https://app.lumahealth.io/')
+		response.redirect('https://app-next.lumahealth.io/')
 	} else {
 		response.redirect('http://localhost:3000/')
 	}

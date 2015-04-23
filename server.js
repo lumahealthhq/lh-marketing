@@ -50,13 +50,21 @@ app.post('/moreinfo', function(request, response) {
 	var name = request.body.name,
 		email = request.body.email,
 		role = request.body.role,
-		org = request.body.org;
+		org = request.body.org,
+		utm_source = request.body.utm_source || '',
+		utm_medium = request.body.utm_medium || '',
+		utm_content = request.body.utm_content || '',
+		utm_campaign = request.body.utm_campaign || '';
+
+	var utms = '';
+	utms = utm_source + ' ' + utm_medium + ' ' + utm_content + ' ' + utm_campaign;
 
 	var mailbody = 'New web form submission. \n';
 	mailbody += 'Name: ' + name + '\n';
 	mailbody += 'Email: ' + email + '\n';
 	mailbody += 'Role: ' + role + '\n';
 	mailbody += 'Org: ' + org + '\n';
+	mailbody += 'UTMs: ' + utms + '\n';
 	mailbody += (new Date());
 
 	console.log(mailbody);
@@ -71,9 +79,10 @@ app.post('/moreinfo', function(request, response) {
 	  console.log(json);
 	});
 
+	
 	slack.send({
 		channel: '#general',
-		text: 'yo homies: `' + name + '` ' + email + ' just signed up on the marketing site. more deets in ur email.',
+		text: 'yo homies: `' + name + '` ' + email + ' just signed up on the marketing site. ' + utms.trim(),
 		username: 'badbot'
 	});
 

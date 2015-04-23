@@ -43,18 +43,20 @@ app.get('/', function(request, response) {
     response.sendfile(__dirname + '/public/index.html');
 });
 
-app.post('/moreinfo', function(request, response) {
-
+app.get('/thankyou', function(request, response) {
 	response.sendfile(__dirname + '/public/thankyou.html');
+})
+
+app.post('/', function(request, response) {
 
 	var name = request.body.name,
 		email = request.body.email,
 		role = request.body.role,
 		org = request.body.org,
-		utm_source = request.body.utm_source || '',
-		utm_medium = request.body.utm_medium || '',
-		utm_content = request.body.utm_content || '',
-		utm_campaign = request.body.utm_campaign || '';
+		utm_source = request.query.utm_source || '',
+		utm_medium = request.query.utm_medium || '',
+		utm_content = request.query.utm_content || '',
+		utm_campaign = request.query.utm_campaign || '';
 
 	var utms = '';
 	utms = utm_source + ' ' + utm_medium + ' ' + utm_content + ' ' + utm_campaign;
@@ -86,7 +88,7 @@ app.post('/moreinfo', function(request, response) {
 		username: 'badbot'
 	});
 
-
+	response.redirect('/thankyou');
 });
 
 app.configure(function() {

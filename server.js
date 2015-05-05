@@ -28,7 +28,7 @@ if(process.env.ENV) {
 
 app.get('/login', function(request, response) {
 	if(request.headers.host.indexOf('fortid') > 0) {
-		response.redirect('https://app.fortid.com/')
+		response.redirect('http://app.fortid.com/')
 	} else if(request.headers.host.indexOf('luma') > 0) {
 		response.redirect('https://app-next.lumahealth.io/')
 	} else {

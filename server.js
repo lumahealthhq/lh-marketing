@@ -95,4 +95,5 @@ app.configure(function() {
     app.use('/', express.static(__dirname + '/public/'));
 });
 
+console.log('starting lh-marketing on port ' + port);
 app.listen(port);

@@ -3,6 +3,8 @@ var express = require('express'),
 var port = process.env.PORT || 5000;
 var sendgrid  = require('sendgrid')(process.env.SENDGRID_API_USER, process.env.SENDGRID_API_KEY);
 var slack = require('slack-notify')(process.env.SLACK_ENDPOINT);
+var Pipedrive = require('pipedrive');
+var pipedrive = new Pipedrive.Client(process.env.PIPEDRIVE_API_KEY);
 
 var app = express();
 app.use(bodyparser.urlencoded());
@@ -61,6 +63,8 @@ app.post('/', function(request, response) {
 	var utms = '';
 	utms = utm_source + ' ' + utm_medium + ' ' + utm_content + ' ' + utm_campaign;
 
+	// 1) send an email
+
 	var mailbody = 'New web form submission. \n';
 	mailbody += 'Name: ' + name + '\n';
 	mailbody += 'Email: ' + email + '\n';
@@ -82,10 +86,32 @@ app.post('/', function(request, response) {
 	});
 
 	
+	// 2) post a message to slack
 	slack.send({
 		channel: '#general',
 		text: 'yo homies: `' + name + '` ' + email + ' just signed up on the marketing site. ' + utms.trim(),
 		username: 'badbot'
+	});
+
+	// 3) create a deal in pipedrive
+
+	pipedrive.Persons.add({
+		name: name,
+		email: email
+	}, function(err, person) {
+		pipedrive.Deals.add({
+			title: name,
+			person_id: person.id
+		}, function(err, deal) {
+			var content = 'Deal via marketing site.';
+			content += ' Role = ' + role;
+			content += ' Organization = ' + org;
+			content += ' UTMs = ' + utms.trim();
+			pipedrive.Notes.add({
+				content: content,
+				deal_id: deal.id
+			});
+		});
 	});
 
 	response.redirect('/thankyou');

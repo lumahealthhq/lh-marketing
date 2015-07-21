@@ -89,7 +89,7 @@ app.post('/', function(request, response) {
 	// 2) post a message to slack
 	slack.send({
 		channel: '#general',
-		text: 'yo homies: `' + name + '` ' + email + ' just signed up on the marketing site. ' + utms.trim(),
+		text: 'new inbound marketing site lead. ```' + mailbody + '```',
 		username: 'badbot'
 	});
 

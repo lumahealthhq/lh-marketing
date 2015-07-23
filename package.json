@@ -10,6 +10,7 @@
   "author": "Aditya Bansod (@adityabansod, http://www.adityabansod.net)",
   "license": "MIT",
   "dependencies": {
+    "activecampaign": "^1.0.1",
     "body-parser": "^1.12.0",
     "express": "~3.4.7",
     "express-force-domain": "0.0.6",

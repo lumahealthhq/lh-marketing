@@ -6,6 +6,10 @@ var slack = require('slack-notify')(process.env.SLACK_ENDPOINT);
 var Pipedrive = require('pipedrive');
 var pipedrive = new Pipedrive.Client(process.env.PIPEDRIVE_API_KEY);
 
+var ActiveCampaign = require("activecampaign");
+var ac = new ActiveCampaign("https://lumahealth.api-us1.com", process.env.ACTIVECAMPAIGN_API_KEY);
+ac.debug = true;
+
 var app = express();
 app.use(bodyparser.urlencoded());
 if(process.env.ENV) {
@@ -82,7 +86,7 @@ app.post('/', function(request, response) {
 	  text:     mailbody
 	}, function(err, json) {
 	  if (err) { return console.error(err); }
-	  console.log(json);
+	  console.log('sendgrid', json);
 	});
 
 	
@@ -93,26 +97,34 @@ app.post('/', function(request, response) {
 		username: 'badbot'
 	});
 
-	// 3) create a deal in pipedrive
+	// 3) create a lead in active campagain
+	var newContact = {
+		email: email,
+		first_name: name,
+		orgname: org
+	}	
 
-	pipedrive.Persons.add({
-		name: name,
-		email: email
-	}, function(err, person) {
-		pipedrive.Deals.add({
-			title: name,
-			person_id: person.id
-		}, function(err, deal) {
-			var content = 'Deal via marketing site.';
-			content += ' Role = ' + role;
-			content += ' Organization = ' + org;
-			content += ' UTMs = ' + utms.trim();
-			pipedrive.Notes.add({
-				content: content,
-				deal_id: deal.id
-			});
-		});
+	ac.api('contact/add', newContact).then(function(result) {
+		console.log('ac contact add', result);
+	}, function(result) {
+		console.log('bye', result)
 	});
+
+	ac.version(2);
+	ac.track_actid = process.env.ACTIVECAMPAIGN_ACCOUNT_ID;
+	ac.track_key = process.env.ACTIVECAMPAGIN_TRACKING_KEY;
+	ac.track_email = email;
+	var eventdata = {
+		event: "lhmarketingformsubmission",
+		eventdata: utms
+	};
+	ac.api("tracking/log", eventdata).then(function(result) {
+		// successful request
+		console.log('ac tracking', result);
+	}, function(result) {
+		// request error
+	});
+
 
 	response.redirect('/thankyou');
 });

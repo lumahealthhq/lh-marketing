@@ -3,12 +3,8 @@ var express = require('express'),
 var port = process.env.PORT || 5000;
 var sendgrid  = require('sendgrid')(process.env.SENDGRID_API_USER, process.env.SENDGRID_API_KEY);
 var slack = require('slack-notify')(process.env.SLACK_ENDPOINT);
-var Pipedrive = require('pipedrive');
-var pipedrive = new Pipedrive.Client(process.env.PIPEDRIVE_API_KEY);
-
 var ActiveCampaign = require("activecampaign");
 var ac = new ActiveCampaign("https://lumahealth.api-us1.com", process.env.ACTIVECAMPAIGN_API_KEY);
-ac.debug = true;
 
 var app = express();
 app.use(bodyparser.urlencoded());
@@ -101,7 +97,9 @@ app.post('/', function(request, response) {
 	var newContact = {
 		email: email,
 		first_name: name,
-		orgname: org
+		orgname: org,
+		role: role,
+		utms: utms
 	}	
 
 	ac.api('contact/add', newContact).then(function(result) {

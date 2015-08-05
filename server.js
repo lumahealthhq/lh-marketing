@@ -8,6 +8,7 @@ var ac = new ActiveCampaign("https://lumahealth.api-us1.com", process.env.ACTIVE
 
 var app = express();
 app.use(bodyparser.urlencoded());
+
 if(process.env.ENV) {
 	app.use(function(req, res, next) {
 		if (req.headers['host'] != 'www.lumahealth.io') {

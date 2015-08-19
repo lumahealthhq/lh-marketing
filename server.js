@@ -51,6 +51,7 @@ app.get('/thankyou', function(request, response) {
 })
 
 app.post('/', function(request, response) {
+	console.log('request body', request.body)
 	if(!request.body.name || !request.body.email) {
 		response.redirect('/?invalid');
 		return;
